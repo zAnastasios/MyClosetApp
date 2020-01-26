@@ -59,6 +59,8 @@ public class AddClotheActivity extends AppCompatActivity {
     private Button galleryButton;
     private Bitmap bitmap;
 
+
+    //TODO ADD MORE COLORS HERE!! ALSO ADD SPINNER FOR CATEGORY
     private static final String[] colors = {"Κόκκινο", "Πράσινο", "Μπλε"};
 
     @RequiresApi(api = Build.VERSION_CODES.M)

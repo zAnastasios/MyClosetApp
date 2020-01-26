@@ -9,8 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -19,11 +18,11 @@ import com.example.myclosetapp.R;
 import com.example.myclosetapp.data.Clothe;
 import com.example.myclosetapp.ui.ClotheAdapter;
 import com.example.myclosetapp.ui.ClotheViewModel;
-import com.example.myclosetapp.utils.ImageConverter;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.sql.Time;
+import com.example.myclosetapp.utils.FormatDateTime;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -72,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
             Boolean isClean = data.getBooleanExtra(AddClotheActivity.EXTRA_ISCLEAN,false);
             byte [] clotheImage= data.getByteArrayExtra(AddClotheActivity.EXTRA_IMAGE);
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-
+         //   Date date = new Date(); //FormatDateTime.fromTimestampToDate(timestamp.toString());
             Clothe clothe = new Clothe(color,category,description,isClean, clotheImage,timestamp);
             clotheViewModel.insertClothe(clothe);
             Toast.makeText(this,"Clothe saved",Toast.LENGTH_SHORT).show();

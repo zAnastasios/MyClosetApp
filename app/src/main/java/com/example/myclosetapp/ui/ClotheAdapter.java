@@ -14,7 +14,6 @@ import com.example.myclosetapp.data.Clothe;
 import com.example.myclosetapp.utils.FormatDateTime;
 import com.example.myclosetapp.utils.ImageConverter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class ClotheAdapter extends RecyclerView.Adapter<ClotheAdapter.ClotheHolder> {
@@ -24,8 +23,8 @@ public class ClotheAdapter extends RecyclerView.Adapter<ClotheAdapter.ClotheHold
     @NonNull
     @Override
     public ClotheHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-       View itemView = LayoutInflater.from(parent.getContext())
-               .inflate(R.layout.clothe_item,parent,false);
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.clothe_item, parent, false);
         return new ClotheHolder(itemView);
     }
 
@@ -38,12 +37,11 @@ public class ClotheAdapter extends RecyclerView.Adapter<ClotheAdapter.ClotheHold
         holder.textViewDescription.setText(currClothe.getDescription());
         Bitmap bmap = ImageConverter.convertByteArrayToImage(currClothe.getImage());
         holder.imageViewClothe.setImageBitmap(bmap);
-//        Date date = FormatDateTime.fromTimestampToDate( currClothe.getDateLastWorn().toString());
-//        holder.dateLastWorn.setText(date.toString());
-        if(currClothe.getToClean()) {
+        String lastWorn = FormatDateTime.dateToTimestamp(currClothe.getDateLastWorn());
+        holder.textViewDateLastWorn.setText(lastWorn);
+        if (currClothe.getToClean()) {
             holder.textViewIsClean.setText("Βρώμικο");
-        }
-        else {
+        } else {
             holder.textViewIsClean.setText("Καθαρό");
         }
     }
@@ -53,29 +51,28 @@ public class ClotheAdapter extends RecyclerView.Adapter<ClotheAdapter.ClotheHold
         return clothes.size();
     }
 
-    public void setClothe(List<Clothe> clothes){
-        this.clothes=clothes;
+    public void setClothe(List<Clothe> clothes) {
+        this.clothes = clothes;
         notifyDataSetChanged();
     }
 
 
-
-    class ClotheHolder extends RecyclerView.ViewHolder{
+    class ClotheHolder extends RecyclerView.ViewHolder {
         private TextView textViewColor;
         private TextView textViewCategory;
         private TextView textViewDescription;
         private TextView textViewIsClean;
         private ImageView imageViewClothe;
-        private TextView  textViewDateLastWorn;
+        private TextView textViewDateLastWorn;
 
         public ClotheHolder(@NonNull View itemView) {
             super(itemView);
-            textViewColor= itemView.findViewById(R.id.textview_color);
-            textViewCategory=itemView.findViewById(R.id.textview_category);
-            textViewDescription=itemView.findViewById(R.id.textview_description);
-            textViewIsClean=itemView.findViewById(R.id.textview_cleanstate);
-            imageViewClothe=itemView.findViewById(R.id.clothe_image);
-            textViewDateLastWorn=itemView.findViewById(R.id.text_view_date_last_worn);
+            textViewColor = itemView.findViewById(R.id.textview_color);
+            textViewCategory = itemView.findViewById(R.id.textview_category);
+            textViewDescription = itemView.findViewById(R.id.textview_description);
+            textViewIsClean = itemView.findViewById(R.id.textview_cleanstate);
+            imageViewClothe = itemView.findViewById(R.id.clothe_image);
+            textViewDateLastWorn = itemView.findViewById(R.id.text_view_date_last_worn);
         }
 
     }
