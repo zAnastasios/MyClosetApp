@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MyClosetApp</string>
+    <string name="colorGR">Χρώμα:     </string>
+    <string name="categoryGR">Κατηγορία: </string>
+    <string name="descriptionGR">Περιγραφή: </string>
+    <string name="clotheStateGR">Κατάσταση: </string>
+    <string name="orderByColorGR">Χρωματική Ταξινόμηση</string>
+    <string name="lastWornGR">Φορέθηκε Στις:</string>
+</resources>

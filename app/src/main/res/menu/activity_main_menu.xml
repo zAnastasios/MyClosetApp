@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="@layout/activity_main"
+    >
+
+    <group
+        android:id="@+id/grp2"
+        android:checkableBehavior="single"
+        >
+        <item
+            android:title="@string/orderByColorGR"
+            android:id="@+id/orderByColor"
+            android:icon="@drawable/ic_color_order"
+            />
+
+        <item
+            android:title="Thing2"
+            android:id="@+id/Thing2"
+            />
+        <item
+            android:title="Thing3"
+            android:id="@+id/Thing3"
+            />
+
+        <item
+            android:title="Thing4"
+            android:id="@+id/Thing4"
+            />
+
+
+        <item
+            android:title="Thing5"
+            android:id="@+id/Thing5"
+            />
+
+        <item
+            android:title="Thing6"
+            android:id="@+id/Thing6"
+            />
+        <item
+            android:title="Thing7"
+            android:id="@+id/Thing7"
+            />
+
+        <item
+            android:title="Thing8"
+            android:id="@+id/Thing8"
+            />
+
+        <item
+            android:title="Thing9"
+            android:id="@+id/Thing9"
+            />
+
+        <item
+            android:title="Thing10"
+            android:id="@+id/Thing10"
+            />
+        <item
+            android:title="Thing11"
+            android:id="@+id/Thing11"
+            />
+
+        <item
+            android:title="Thing12"
+            android:id="@+id/Thing12"
+            />
+
+
+    </group>
+
+</menu>
