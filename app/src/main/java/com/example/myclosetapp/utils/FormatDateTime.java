@@ -10,10 +10,9 @@ import java.util.Date;
 
 public class FormatDateTime {
 
-    static DateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss" );
+    static DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss" );
     @TypeConverter
     public static Date fromTimestampToDate(String value) {
-
 
         try {
             return  dateFormatter.parse(value) ;
@@ -27,5 +26,8 @@ public class FormatDateTime {
     public static String dateToTimestamp(Date date) {
         return date == null ? null : date.toString();
     }
+
+
+
 
 }
