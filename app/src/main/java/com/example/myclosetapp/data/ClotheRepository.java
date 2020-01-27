@@ -32,6 +32,27 @@ public class ClotheRepository {
         return allClothes;
     }
 
+    public LiveData<List<Clothe>> getClothesByColorOrder(String color) { return clotheDao.getClothesByColor(color);}
+
+
+
+
+//    private static class GetClothesByColorAsync extends AsyncTask<String,Void,Void>{
+//        private ClotheDAO clotheDAO;
+//        private GetClothesByColorAsync(ClotheDAO clotheDAO){
+//            this.clotheDAO=clotheDAO;
+//        }
+//        @Override
+//        protected LiveData<List<Clothe>> doInBackground(String... strings) {
+//            return clotheDAO.getClothesByColor(strings[0]);
+//
+//        }
+//    }
+
+
+
+
+
     private static class InsertClotheAsyncTask extends AsyncTask<Clothe,Void,Void>{
         private ClotheDAO clotheDAO;
         private InsertClotheAsyncTask(ClotheDAO clotheDAO){

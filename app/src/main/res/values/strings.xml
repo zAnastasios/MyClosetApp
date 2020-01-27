@@ -6,4 +6,9 @@
     <string name="clotheStateGR">Κατάσταση: </string>
     <string name="orderByColorGR">Χρωματική Ταξινόμηση</string>
     <string name="lastWornGR">Φορέθηκε Στις:</string>
+    <string name="redGR">Κόκκινο</string>
+    <string name="greenGR">Πράσινο</string>
+    <string name="blueGR">Μπλε</string>
+    <string name="everythingGR">ΟΛΑ</string>
+
 </resources>

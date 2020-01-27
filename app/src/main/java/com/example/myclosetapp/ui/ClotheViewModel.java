@@ -38,6 +38,10 @@ public class ClotheViewModel extends AndroidViewModel {
         return allClothes;
     }
 
+    public LiveData<List<Clothe>> getClothesByColor(String color){return clotheRepository.getClothesByColorOrder(color);}
+
+
+
 
 
 }

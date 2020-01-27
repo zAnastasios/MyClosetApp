@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -38,12 +39,15 @@ public class ClotheAdapter extends RecyclerView.Adapter<ClotheAdapter.ClotheHold
         Bitmap bmap = ImageConverter.convertByteArrayToImage(currClothe.getImage());
         holder.imageViewClothe.setImageBitmap(bmap);
         String lastWorn = FormatDateTime.dateToTimestamp(currClothe.getDateLastWorn());
-        holder.textViewDateLastWorn.setText(lastWorn);
+        String lastWornNiceFormat = lastWorn.substring(0,10)+lastWorn.substring(23,lastWorn.length());
+        holder.textViewDateLastWorn.setText(lastWornNiceFormat);
         if (currClothe.getToClean()) {
             holder.textViewIsClean.setText("Βρώμικο");
         } else {
             holder.textViewIsClean.setText("Καθαρό");
         }
+
+
     }
 
     @Override
@@ -56,6 +60,10 @@ public class ClotheAdapter extends RecyclerView.Adapter<ClotheAdapter.ClotheHold
         notifyDataSetChanged();
     }
 
+    public Clothe getClotheAt(int position){
+        return clothes.get(position);
+    }
+
 
     class ClotheHolder extends RecyclerView.ViewHolder {
         private TextView textViewColor;
@@ -64,6 +72,9 @@ public class ClotheAdapter extends RecyclerView.Adapter<ClotheAdapter.ClotheHold
         private TextView textViewIsClean;
         private ImageView imageViewClothe;
         private TextView textViewDateLastWorn;
+        private ImageButton buttonDeleteClothe;
+        private ImageButton buttonEditClothe;
+
 
         public ClotheHolder(@NonNull View itemView) {
             super(itemView);
@@ -73,6 +84,8 @@ public class ClotheAdapter extends RecyclerView.Adapter<ClotheAdapter.ClotheHold
             textViewIsClean = itemView.findViewById(R.id.textview_cleanstate);
             imageViewClothe = itemView.findViewById(R.id.clothe_image);
             textViewDateLastWorn = itemView.findViewById(R.id.text_view_date_last_worn);
+            buttonDeleteClothe=itemView.findViewById(R.id.button_delete_clothe);
+            buttonEditClothe=itemView.findViewById(R.id.button_edit_clothe);
         }
 
     }
