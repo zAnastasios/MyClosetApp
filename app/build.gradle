@@ -10,6 +10,13 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
+
     }
     buildTypes {
         release {
@@ -47,5 +54,7 @@ dependencies {
     implementation "androidx.cardview:cardview:1.0.0"
 
     implementation "androidx.recyclerview:recyclerview:1.1.0"
+
+    implementation 'com.facebook.android:facebook-login:4.41.0'
 
 }

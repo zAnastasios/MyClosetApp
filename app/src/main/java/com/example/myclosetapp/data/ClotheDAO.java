@@ -25,4 +25,15 @@ public interface ClotheDAO {
     @Query("SELECT * FROM clothe_table WHERE color= :color")
     LiveData<List<Clothe>> getClothesByColor(String color);
 
+    @Query("SELECT * FROM clothe_table ORDER BY dateLastWorn DESC")
+    LiveData<List<Clothe>> getClothesOrderASC ();
+
+    @Query("SELECT * FROM clothe_table WHERE toClean=1")
+    LiveData<List<Clothe>> getAllDirtyClothes();
+
+    @Query("SELECT * FROM clothe_table WHERE dateLastWorn < :date")
+    LiveData<List<Clothe>> getAllClothesByDate (String date);
+
+
+
 }

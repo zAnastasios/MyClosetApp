@@ -5,32 +5,53 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginStart="8dp"
     android:layout_marginEnd="8dp"
-    android:layout_marginTop="8dp">
+    android:layout_marginTop="8dp"
+    app:cardCornerRadius="@dimen/global_spacing_8">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="8dp">
+        >
 
-
-        <ImageView
-            android:id="@+id/clothe_image"
-            android:layout_width="match_parent"
-            android:layout_height="240dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/blue_to_black_gradient"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/linear_more_info"
-            />
         <LinearLayout
-            android:id="@+id/linear_more_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/clothe_image"
+            android:id="@+id/clothe_image_linear_container"
+            android:layout_margin="@dimen/global_spacing_8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/blue_to_black_gradient">
+
+            <ImageView
+                android:id="@+id/clothe_image"
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/linear_clothe_menu"
+                />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/linear_clothe_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/clothe_image_linear_container"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:orientation="vertical">
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_margin="@dimen/global_spacing_8">
+
+        <LinearLayout
+            android:id="@+id/wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="8"
+           >
 
             <LinearLayout
                 android:id="@+id/linear_color_info"
@@ -87,6 +108,7 @@
                 android:id="@+id/textview_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:maxLines="1"
                />
 
         </LinearLayout>
@@ -108,6 +130,7 @@
                     android:id="@+id/text_view_date_last_worn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:maxLines="1"
                     />
 
             </LinearLayout>
@@ -136,6 +159,40 @@
 
 
         </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/button_delete_clothe"
+                    android:layout_marginStart="@dimen/global_spacing_16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_delete_clothe"
+                    android:tint="@color/colorWhite"
+                    android:backgroundTint="@color/colorEmail_red"
+                    android:layout_gravity="center_vertical"/>
+
+                <ImageButton
+                    android:id="@+id/button_edit_clothe"
+                    android:layout_marginStart="@dimen/global_spacing_16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_edit_clothe"
+                    android:tint="@color/colorWhite"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:layout_gravity="center_vertical"/>
+
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

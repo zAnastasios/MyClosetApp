@@ -24,7 +24,8 @@ public class FormatDateTime {
 
     @TypeConverter
     public static String dateToTimestamp(Date date) {
-        return date == null ? null : date.toString();
+      // SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return date == null ? null : dateFormatter.format(date);
     }
 
 

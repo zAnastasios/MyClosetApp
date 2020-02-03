@@ -32,6 +32,50 @@ public class ClotheRepository {
         return allClothes;
     }
 
+    public LiveData<List<Clothe>> getClothesByColorOrder(String color) { return clotheDao.getClothesByColor(color);}
+
+    public LiveData<List<Clothe>> getClothesDateOrder (){return clotheDao.getClothesOrderASC();}
+
+    public LiveData<List<Clothe>> getAllClotheSpecifyDate(String date){return clotheDao.getAllClothesByDate(date);}
+
+    public LiveData<List<Clothe>> getallDirtyClothes(){return  clotheDao.getAllDirtyClothes();}
+
+
+
+ //   public List<Clothe> getClotheMatching(String style) {return clotheDao.get}
+
+
+
+
+//    private static class GetClothesByColorAsync extends AsyncTask<String,Void,Void>{
+//        private ClotheDAO clotheDAO;
+//        private GetClothesByColorAsync(ClotheDAO clotheDAO){
+//            this.clotheDAO=clotheDAO;
+//        }
+//        @Override
+//        protected LiveData<List<Clothe>> doInBackground(String... strings) {
+//            return clotheDAO.getClothesByColor(strings[0]);
+//
+//        }
+//    }
+//    private static class GetClotheDateAsyncTask extends AsyncTask<Clothe,Void,Void>{
+//        private ClotheDAO clotheDAO;
+//        private GetClotheDateAsyncTask(ClotheDAO clotheDAO){
+//            this.clotheDAO=clotheDAO;
+//        }
+//
+//    @Override
+//    protected Void doInBackground(Clothe... clothes) {
+//        clotheDAO.getAllClothesByDate()
+//    }
+//
+//}
+
+
+
+
+
+
     private static class InsertClotheAsyncTask extends AsyncTask<Clothe,Void,Void>{
         private ClotheDAO clotheDAO;
         private InsertClotheAsyncTask(ClotheDAO clotheDAO){
