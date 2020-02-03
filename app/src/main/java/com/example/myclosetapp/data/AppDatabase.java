@@ -9,7 +9,7 @@ import androidx.room.TypeConverters;
 
 import com.example.myclosetapp.utils.FormatDateTime;
 
-@Database(entities = Clothe.class,version = 11)
+@Database(entities = Clothe.class,version = 14)
 @TypeConverters({FormatDateTime.class})
 public abstract class AppDatabase extends RoomDatabase {
 

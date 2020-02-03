@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.ClotheMatchingActivity">
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabsStyles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabMode="scrollable"
+        >
+
+        <com.google.android.material.tabs.TabItem
+            android:icon="@drawable/ic_format_color_icon_tabs"
+            android:text="@string/diyGR"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            />
+
+        <com.google.android.material.tabs.TabItem
+            android:icon="@drawable/ic_format_color_fill_red"
+            android:text="@string/menGR"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            />
+        <com.google.android.material.tabs.TabItem
+            android:icon="@drawable/ic_format_color_icon_tabs"
+            android:text="@string/womenGR"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+
+
+    </com.google.android.material.tabs.TabLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_clothe_options"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/clothe_item"
+        />
+
+
+</LinearLayout>

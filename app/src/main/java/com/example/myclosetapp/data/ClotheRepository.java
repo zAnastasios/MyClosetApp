@@ -34,6 +34,16 @@ public class ClotheRepository {
 
     public LiveData<List<Clothe>> getClothesByColorOrder(String color) { return clotheDao.getClothesByColor(color);}
 
+    public LiveData<List<Clothe>> getClothesDateOrder (){return clotheDao.getClothesOrderASC();}
+
+    public LiveData<List<Clothe>> getAllClotheSpecifyDate(String date){return clotheDao.getAllClothesByDate(date);}
+
+    public LiveData<List<Clothe>> getallDirtyClothes(){return  clotheDao.getAllDirtyClothes();}
+
+
+
+ //   public List<Clothe> getClotheMatching(String style) {return clotheDao.get}
+
 
 
 
@@ -48,6 +58,19 @@ public class ClotheRepository {
 //
 //        }
 //    }
+//    private static class GetClotheDateAsyncTask extends AsyncTask<Clothe,Void,Void>{
+//        private ClotheDAO clotheDAO;
+//        private GetClotheDateAsyncTask(ClotheDAO clotheDAO){
+//            this.clotheDAO=clotheDAO;
+//        }
+//
+//    @Override
+//    protected Void doInBackground(Clothe... clothes) {
+//        clotheDAO.getAllClothesByDate()
+//    }
+//
+//}
+
 
 
 

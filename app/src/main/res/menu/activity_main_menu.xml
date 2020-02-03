@@ -12,61 +12,47 @@
             android:title="@string/orderByColorGR"
             android:id="@+id/orderByColor"
             android:icon="@drawable/ic_color_order"
+            android:iconTint="@color/colorEmail_red"
             />
 
         <item
-            android:title="Thing2"
-            android:id="@+id/Thing2"
+            android:title="@string/autoClothingGR"
+            android:id="@+id/randomStyle"
+            android:icon="@drawable/ic_random_style"
+            android:iconTint="@color/colorAccent"
             />
         <item
-            android:title="Thing3"
-            android:id="@+id/Thing3"
+            android:title="@string/dateOrderGR"
+            android:id="@+id/dateOrder"
+            android:icon="@drawable/ic_date_clothe"
             />
 
         <item
-            android:title="Thing4"
-            android:id="@+id/Thing4"
+            android:title="@string/washerGR"
+            android:id="@+id/washer"
+            android:icon="@drawable/ic_washer"
+            android:iconTint="@color/turquoise"
             />
 
 
         <item
-            android:title="Thing5"
-            android:id="@+id/Thing5"
+            android:title="@string/helpGR"
+            android:id="@+id/help"
+            android:icon="@drawable/ic_help"
+            android:iconTint="@color/totalBlue"
             />
 
         <item
-            android:title="Thing6"
-            android:id="@+id/Thing6"
+            android:title="@string/aboutUsGR"
+            android:id="@+id/aboutUs"
+            android:icon="@drawable/ic_about_us"
+            android:iconTint="@color/pink"
             />
+
         <item
             android:title="Thing7"
             android:id="@+id/Thing7"
             />
-
-        <item
-            android:title="Thing8"
-            android:id="@+id/Thing8"
-            />
-
-        <item
-            android:title="Thing9"
-            android:id="@+id/Thing9"
-            />
-
-        <item
-            android:title="Thing10"
-            android:id="@+id/Thing10"
-            />
-        <item
-            android:title="Thing11"
-            android:id="@+id/Thing11"
-            />
-
-        <item
-            android:title="Thing12"
-            android:id="@+id/Thing12"
-            />
-
 
     </group>
 

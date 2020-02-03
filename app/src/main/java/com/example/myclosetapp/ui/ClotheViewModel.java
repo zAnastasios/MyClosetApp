@@ -40,6 +40,14 @@ public class ClotheViewModel extends AndroidViewModel {
 
     public LiveData<List<Clothe>> getClothesByColor(String color){return clotheRepository.getClothesByColorOrder(color);}
 
+    public LiveData<List<Clothe>>  getClotheDateASC (){return  clotheRepository.getClothesDateOrder();}
+
+    public LiveData<List<Clothe>>  getClothesSpecificDate(String date){return clotheRepository.getAllClotheSpecifyDate(date);}
+
+    public LiveData<List<Clothe>> getClothesDirty(){return clotheRepository.getallDirtyClothes();}
+
+
+
 
 
 

@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">MyClosetApp</string>
+
+    <string name="facebook_app_id">807409673105890</string>
+    <string name="fb_login_protocol_scheme">fb807409673105890</string>
+
     <string name="colorGR">Χρώμα:     </string>
     <string name="categoryGR">Κατηγορία: </string>
     <string name="descriptionGR">Περιγραφή: </string>
@@ -10,5 +14,27 @@
     <string name="greenGR">Πράσινο</string>
     <string name="blueGR">Μπλε</string>
     <string name="everythingGR">ΟΛΑ</string>
+    <string name="pressIfDirty">Αν το ρούχο είναι βρώμικο πατήστε εδώ</string>
+    <string name="cameraGR">Κάμερα</string>
+    <string name="galleryGR">Συλλογή</string>
+    <string name="menGR">ΑΝΔΡΙΚΑ</string>
+    <string name="womenGR">ΓΥΝΑΙΚΕΙΑ</string>
+    <string name="diyGR">ΕΠΕΛΕΞΕ</string>
+    <string name="autoClothingGR">Πρόταση Επιλογής</string>
+    <string name="dateOrderGR">Ημερολογιακή Ταξινόμηση</string>
+    <string name="dateDescGR">Φθίνουσα</string>
+    <string name="moreThan3GR">Μέρες>3</string>
+    <string name="moreThan5GR">Μέρες>5</string>
+    <string name="moreThan7GR">Μέρες>7</string>
+    <string name="moreThan10GR">Μέρες>10</string>
+    <string name="moreThan14GR">Μέρες>14</string>
+    <string name="moreThan20GR">Μέρες>20</string>
+    <string name="moreThan30GR">Μέρες>30</string>
+    <string name="washerGR">Βάλε Πλυντήριο</string>
+    <string name="helpGR">Βοήθεια</string>
+    <string name="aboutUsGR">About Us</string>
+    <string name="resetWasherGR">Άδειασμα Κάδου</string>
+    <string name="addToWasherGR">Στον κάδο</string>
+
 
 </resources>

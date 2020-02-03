@@ -49,19 +49,21 @@ public class AddClotheActivity extends AppCompatActivity {
 
     public static final int REQUEST_IMAGE_CAMERA=1,REQUEST_IMAGE_GALLERY=2;
 
-    private Spinner spinner;
+    private Spinner spinnerColor;
+    private Spinner spinnerCategory;
     private EditText editTextDescription;
-    private EditText editTextCategory;
     private CheckBox checkBoxClean;
     private String colorSelected;
+    private String categorySelected;
     private ImageView clotheImage;
     private Button cameraButton;
     private Button galleryButton;
     private Bitmap bitmap;
 
 
-    //TODO ADD MORE COLORS HERE!! ALSO ADD SPINNER FOR CATEGORY
+    //TODO ADD MORE COLORS HERE AND CATEGORIES
     private static final String[] colors = {"Κόκκινο", "Πράσινο", "Μπλε"};
+    private static final String[] categories ={"Μπλόυζα","Φούστα","Μπουφάν"};
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -69,7 +71,6 @@ public class AddClotheActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_clothe);
 
-        editTextCategory = findViewById(R.id.edit_text_category);
         editTextDescription = findViewById(R.id.edit_text_description);
         checkBoxClean = findViewById(R.id.checkboxIsClean);
         clotheImage=findViewById(R.id.image_view_clothe);
@@ -77,13 +78,16 @@ public class AddClotheActivity extends AppCompatActivity {
         galleryButton=findViewById(R.id.button_gallery);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_clothe);
         setTitle("Προσθήκη Ρούχου");
-        spinner = (Spinner) findViewById(R.id.spinner_color);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddClotheActivity.this,
+
+
+        spinnerColor =  findViewById(R.id.spinner_color);
+
+        ArrayAdapter<String> adapterColor = new ArrayAdapter<String>(AddClotheActivity.this,
                 android.R.layout.simple_spinner_item, colors);
 
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        adapterColor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerColor.setAdapter(adapterColor);
+        spinnerColor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
@@ -93,9 +97,31 @@ public class AddClotheActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        spinnerCategory=findViewById(R.id.spinner_category);
+
+        ArrayAdapter<String> adapterCategory = new ArrayAdapter<String>(AddClotheActivity.this,
+                android.R.layout.simple_spinner_item, categories);
+
+        adapterCategory.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerCategory.setAdapter(adapterCategory);
+        spinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+                categorySelected=(String) parent.getItemAtPosition(position);
+                Log.v("item", (String) parent.getItemAtPosition(position));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
                 // TODO Auto-generated method stub
             }
         });
+
 
 
 
@@ -151,7 +177,8 @@ public class AddClotheActivity extends AppCompatActivity {
                bitmap = (Bitmap) data.getExtras().get("data");
                clotheImage.setImageBitmap(bitmap);
             }else if(requestCode==REQUEST_IMAGE_GALLERY){
-                Uri uri = data.getData();
+                //todo check why here fucks up COME BACK AFTER TESTING
+                Uri uri = (Uri) data.getData();
                 try {
                     bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
                     clotheImage.setImageBitmap(bitmap);
@@ -166,7 +193,7 @@ public class AddClotheActivity extends AppCompatActivity {
     private void saveClothe()
     {
         String color=colorSelected;
-        String category=editTextCategory.getText().toString();
+        String category=categorySelected;
         String description=editTextDescription.getText().toString();
         Boolean isCleanState=checkBoxClean.isChecked();
 
@@ -185,7 +212,8 @@ public class AddClotheActivity extends AppCompatActivity {
         data.putExtra(EXTRA_CATEGORY,category);
         data.putExtra(EXTRA_DESCRIPTION,description);
         data.putExtra(EXTRA_ISCLEAN,isCleanState);
-        byte [] byte_array=ImageConverter.convertImageToByteArray(bitmap);
+        //todo Or maybe here fucks up
+        byte [] byte_array= ImageConverter.convertImageToByteArray(bitmap);
         data.putExtra(EXTRA_IMAGE, byte_array);
         setResult(RESULT_OK,data);
         finish();

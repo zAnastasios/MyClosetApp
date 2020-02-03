@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.DateOrderActivity">
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabsDays"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabMode="scrollable"
+        >
+
+        <com.google.android.material.tabs.TabItem
+            android:icon="@drawable/ic_date_clothe"
+            android:text="@string/dateDescGR"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            />
+
+        <com.google.android.material.tabs.TabItem
+            android:icon="@drawable/ic_add_clothe"
+            android:text="@string/moreThan3GR"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            />
+
+        <com.google.android.material.tabs.TabItem
+            android:icon="@drawable/ic_add_clothe"
+            android:text="@string/moreThan5GR"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+
+        <com.google.android.material.tabs.TabItem
+            android:icon="@drawable/ic_add_clothe"
+            android:text="@string/moreThan7GR"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+
+        <com.google.android.material.tabs.TabItem
+            android:icon="@drawable/ic_add_clothe"
+            android:text="@string/moreThan10GR"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+
+        <com.google.android.material.tabs.TabItem
+            android:icon="@drawable/ic_add_clothe"
+            android:text="@string/moreThan14GR"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+
+        <com.google.android.material.tabs.TabItem
+            android:icon="@drawable/ic_add_clothe"
+            android:text="@string/moreThan20GR"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+
+        <com.google.android.material.tabs.TabItem
+            android:icon="@drawable/ic_add_clothe"
+            android:text="@string/moreThan30GR"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+
+
+    </com.google.android.material.tabs.TabLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_clothe_date_order"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/clothe_item"
+        />
+
+
+</LinearLayout>

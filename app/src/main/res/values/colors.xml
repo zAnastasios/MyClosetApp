@@ -9,8 +9,7 @@
     <color name="darkGrey">#272727</color>
     <color name="turquoise">#03DAC6 </color>
     <color name="colorGreen">#1EC21E</color>
-
-
+    <color name="pink">#FF00F4</color>
     <color name="totalRed">#FF0000</color>
     <color name="totalGreen">#00FF00</color>
     <color name="totalBlue">#0000FF</color>
