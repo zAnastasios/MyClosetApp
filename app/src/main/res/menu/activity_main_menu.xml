@@ -50,8 +50,9 @@
             />
 
         <item
-            android:title="Thing7"
-            android:id="@+id/Thing7"
+            android:title="@string/exitGR"
+            android:id="@+id/exit"
+            android:icon="@drawable/ic_exit"
             />
 
     </group>

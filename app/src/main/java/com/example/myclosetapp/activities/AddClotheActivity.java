@@ -36,6 +36,8 @@ import java.io.IOException;
 
 public class AddClotheActivity extends AppCompatActivity {
 
+    public static final String EXTRA_ID=
+            "com.example.myclosetapp.activities.EXTRA_ID";
     public static final String EXTRA_IMAGE=
             "com.example.myclosetapp.activities.EXTRA_IMAGE";
     public static final String EXTRA_COLOR=
@@ -77,7 +79,22 @@ public class AddClotheActivity extends AppCompatActivity {
         cameraButton=findViewById(R.id.button_camera);
         galleryButton=findViewById(R.id.button_gallery);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_clothe);
-        setTitle("Προσθήκη Ρούχου");
+
+        Intent intent = getIntent();
+        if(intent.hasExtra(EXTRA_ID)){
+            setTitle("Επεξεργασία ρούχου");
+            editTextDescription.setText(intent.getStringExtra(EXTRA_DESCRIPTION));
+            if(intent.getBooleanExtra(EXTRA_ISCLEAN,false)){
+                checkBoxClean.setChecked(true);
+            }
+            else{
+                checkBoxClean.setChecked(false);
+            }
+            clotheImage.setImageBitmap(ImageConverter.convertByteArrayToImage(intent.getByteArrayExtra(EXTRA_IMAGE)));
+        }
+        else {
+            setTitle("Προσθήκη Ρούχου");
+        }
 
 
         spinnerColor =  findViewById(R.id.spinner_color);
@@ -212,12 +229,15 @@ public class AddClotheActivity extends AppCompatActivity {
         data.putExtra(EXTRA_CATEGORY,category);
         data.putExtra(EXTRA_DESCRIPTION,description);
         data.putExtra(EXTRA_ISCLEAN,isCleanState);
+        int id = getIntent().getIntExtra(EXTRA_ID,-1);
+        if(id!=-1){
+            data.putExtra(EXTRA_ID,id);
+        }
         //todo Or maybe here fucks up
         byte [] byte_array= ImageConverter.convertImageToByteArray(bitmap);
         data.putExtra(EXTRA_IMAGE, byte_array);
         setResult(RESULT_OK,data);
         finish();
-
 
     }
 

@@ -23,18 +23,25 @@ import android.widget.Toast;
 
 import com.example.myclosetapp.R;
 import com.example.myclosetapp.data.Clothe;
+import com.example.myclosetapp.login.LoginActivity;
 import com.example.myclosetapp.ui.ClotheAdapter;
 import com.example.myclosetapp.ui.ClotheViewModel;
+import com.example.myclosetapp.utils.FormatDateTime;
 import com.facebook.AccessToken;
+import com.facebook.login.Login;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity  {
 
     public static final int ADD_CLOTHE_REQUEST=200;
+    public static final int EDIT_CLOTHE_REQUEST=201;
+
+    private Date dateOfUpdatedClothe;
     private ImageButton deleteClothe;
     private NavigationView mainNavView;
 
@@ -46,6 +53,8 @@ public class MainActivity extends AppCompatActivity  {
 
         deleteClothe=findViewById(R.id.button_delete_clothe);
         mainNavView=findViewById(R.id.main_user_navigation_view);
+        getSupportActionBar();
+        setTitle("Η ντουλάπα μου");
 
         final AccessToken accessToken = AccessToken.getCurrentAccessToken();
         boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
@@ -75,7 +84,8 @@ public class MainActivity extends AppCompatActivity  {
             public void onChanged(List<Clothe> clothes) {
                 //update RecuclerView
                 adapter.setClothe(clothes);
-                Toast.makeText(MainActivity.this,"changed",Toast.LENGTH_LONG).show();
+                if(adapter.getItemCount()==0)
+                Toast.makeText(MainActivity.this,"Δεν υπάρχουν ρούχα στην ντουλάπα σας.Προσθέστε ρούχα για να εμφανιστούν στο αρχικό Menu",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -117,25 +127,32 @@ public class MainActivity extends AppCompatActivity  {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
-                switch (menuItem.getItemId()){
+                switch (menuItem.getItemId()) {
                     case R.id.orderByColor:
-                        Intent intent = new Intent(MainActivity.this,OrderByColorActivity.class);
+                        Intent intent = new Intent(MainActivity.this, OrderByColorActivity.class);
                         startActivity(intent);
                         break;
                     case R.id.randomStyle:
-                       Intent  intent1 = new Intent(MainActivity.this,ClotheMatchingActivity.class);
+                        Intent intent1 = new Intent(MainActivity.this, ClotheMatchingActivity.class);
                         startActivity(intent1);
                         break;
                     case R.id.dateOrder:
-                        Intent intent2 = new Intent(MainActivity.this,DateOrderActivity.class);
+                        Intent intent2 = new Intent(MainActivity.this, DateOrderActivity.class);
                         startActivity(intent2);
                         break;
                     case R.id.washer:
-                        Intent intent3 = new Intent(MainActivity.this,WasherActivity.class);
+                        Intent intent3 = new Intent(MainActivity.this, WasherActivity.class);
                         startActivity(intent3);
                         break;
+                    case R.id.help:
+                        Intent intent4 = new Intent(MainActivity.this, InstructionsActivity.class);
+                        startActivity(intent4);
+                        break;
+                    case R.id.exit:
+                        Intent intent5 = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(intent5);
+                        break;
                 }
-
                 return false;
             }
         });
@@ -165,6 +182,15 @@ public class MainActivity extends AppCompatActivity  {
             //TODO IMPLEMENT EDIT LOGIC HERE
             @Override
             public void onClotheClickUpdate(Clothe clothe) {
+                Intent intent = new Intent(MainActivity.this,AddClotheActivity.class);
+                intent.putExtra(AddClotheActivity.EXTRA_ID,clothe.getClohteid());
+                intent.putExtra(AddClotheActivity.EXTRA_COLOR,clothe.getColor());
+                intent.putExtra(AddClotheActivity.EXTRA_CATEGORY,clothe.getCategory());
+                intent.putExtra(AddClotheActivity.EXTRA_DESCRIPTION,clothe.getDescription());
+                intent.putExtra(AddClotheActivity.EXTRA_ISCLEAN,clothe.getToClean());
+                intent.putExtra(AddClotheActivity.EXTRA_IMAGE,clothe.getImage());
+                dateOfUpdatedClothe=clothe.getDateLastWorn();
+                startActivityForResult(intent,EDIT_CLOTHE_REQUEST);
 
             }
         });
@@ -186,6 +212,23 @@ public class MainActivity extends AppCompatActivity  {
             clotheViewModel.insertClothe(clothe);
             Toast.makeText(this,"Clothe saved",Toast.LENGTH_SHORT).show();
 
+        }else  if(requestCode==EDIT_CLOTHE_REQUEST&&resultCode==RESULT_OK){
+            int id = data.getIntExtra(AddClotheActivity.EXTRA_ID,-1);
+            if(id==-1){
+                Toast.makeText(this,"Clothe can't update",Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            String color=data.getStringExtra(AddClotheActivity.EXTRA_COLOR);
+            String category=data.getStringExtra(AddClotheActivity.EXTRA_CATEGORY);
+            String description=data.getStringExtra(AddClotheActivity.EXTRA_DESCRIPTION);
+            Boolean isClean = data.getBooleanExtra(AddClotheActivity.EXTRA_ISCLEAN,false);
+            byte [] clotheImage= data.getByteArrayExtra(AddClotheActivity.EXTRA_IMAGE);
+            Timestamp timestamp = new Timestamp(dateOfUpdatedClothe.getTime());
+            Clothe clothe = new Clothe(color,category,description,isClean, clotheImage,timestamp);
+            clothe.setClohteid(id);
+            clotheViewModel.updateClothe(clothe);
+            Toast.makeText(this,"Clothe updated ",Toast.LENGTH_SHORT).show();
         }
         else{
             Toast.makeText(this,"Clothe not saved",Toast.LENGTH_SHORT).show();

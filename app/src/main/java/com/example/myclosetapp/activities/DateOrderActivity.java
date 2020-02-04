@@ -22,12 +22,14 @@ import java.util.List;
 public class DateOrderActivity extends AppCompatActivity {
 
     private ClotheViewModel clotheViewModel;
-    private String style;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_date_order);
+
+        getSupportActionBar();
+        setTitle("Ημερολογιακή ταξινόμηση");
 
         TabLayout tabs = findViewById(R.id.tabsDays);
         final RecyclerView recyclerView = findViewById(R.id.recycler_view_clothe_date_order);
