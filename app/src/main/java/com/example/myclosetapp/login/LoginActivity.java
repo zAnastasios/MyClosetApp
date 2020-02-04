@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.myclosetapp.R;
 import com.example.myclosetapp.activities.MainActivity;
@@ -27,7 +29,8 @@ import java.util.Arrays;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private LoginButton loginButton;
+    private LoginButton fbLoginButton;
+    private Button toMain;
     private CallbackManager callbackManager;
 
 
@@ -35,7 +38,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        loginButton=findViewById(R.id.login_button);
+        fbLoginButton=findViewById(R.id.login_button);
+        toMain = findViewById(R.id.autoLoginTesting);
         callbackManager = CallbackManager.Factory.create();
 
         //todo come back here for facebook login
@@ -43,11 +47,19 @@ public class LoginActivity extends AppCompatActivity {
 //        final AccessToken accessToken = AccessToken.getCurrentAccessToken();
 //        boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
 
-        loginButton.setReadPermissions(Arrays.asList("email","public-profile"));
+        fbLoginButton.setReadPermissions(Arrays.asList("email","public-profile"));
         // If you are using in a fragment, call loginButton.setFragment(this);
 
+        toMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
         // Callback registration
-        loginButton.registerCallback(callbackManager, new FacebookCallback <LoginResult>() {
+        fbLoginButton.registerCallback(callbackManager, new FacebookCallback <LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 // App code
@@ -62,6 +74,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
             }
+
 
             @Override
             public void onCancel() {
@@ -114,5 +127,13 @@ public class LoginActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent startMain = new Intent(Intent.ACTION_MAIN);
+        startMain.addCategory(Intent.CATEGORY_HOME);
+        startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(startMain);
     }
 }

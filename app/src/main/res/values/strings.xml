@@ -35,6 +35,11 @@
     <string name="aboutUsGR">About Us</string>
     <string name="resetWasherGR">Άδειασμα Κάδου</string>
     <string name="addToWasherGR">Στον κάδο</string>
+    <string name="securityBypass">Security Bypass</string>
+    <string name="copyright">© MyClosetApp</string>
+    <string name="nextGR">Επόμενο</string>
+    <string name="previousGR">Προηγούμενο</string>
+    <string name="exitGR">Έξοδος</string>
 
 
 </resources>

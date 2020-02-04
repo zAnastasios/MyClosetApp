@@ -27,6 +27,8 @@ public class OrderByColorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_by_color);
 
+        getSupportActionBar();
+        setTitle("Χρωματική ταξινόμηση");
 
         TabLayout tabs =  findViewById(R.id.tabs);
         final RecyclerView recyclerView = findViewById(R.id.recycler_view_clothe_color_ordering_tab);
