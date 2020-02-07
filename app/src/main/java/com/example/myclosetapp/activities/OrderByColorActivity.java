@@ -44,7 +44,12 @@ public class OrderByColorActivity extends AppCompatActivity {
             public void onChanged(List<Clothe> clothes) {
                 //update RecuclerView
                 adapter.setClothe(clothes);
-                Toast.makeText(OrderByColorActivity.this,"changed",Toast.LENGTH_LONG).show();
+                if (adapter.getItemCount()==0){
+                    Toast.makeText(OrderByColorActivity.this,"Δεν υπάρχουν ρούχα στην ντουλάπα σας",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(OrderByColorActivity.this, "Χρωματική προβολή", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -69,7 +74,7 @@ public class OrderByColorActivity extends AppCompatActivity {
                         public void onChanged(List<Clothe> clothes) {
                             //update RecuclerView
                             adapter.setClothe(clothes);
-                            Toast.makeText(OrderByColorActivity.this, "Displaying clothes with color " + colorToOrderBy, Toast.LENGTH_LONG).show();
+                            Toast.makeText(OrderByColorActivity.this, "Προβολή ρούχων με χρώμα " + colorToOrderBy, Toast.LENGTH_LONG).show();
                         }
                     });
                 }

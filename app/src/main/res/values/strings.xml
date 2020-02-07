@@ -1,9 +1,7 @@
 <resources>
     <string name="app_name">MyClosetApp</string>
-
     <string name="facebook_app_id">807409673105890</string>
     <string name="fb_login_protocol_scheme">fb807409673105890</string>
-
     <string name="colorGR">Χρώμα:     </string>
     <string name="categoryGR">Κατηγορία: </string>
     <string name="descriptionGR">Περιγραφή: </string>
@@ -40,6 +38,8 @@
     <string name="nextGR">Επόμενο</string>
     <string name="previousGR">Προηγούμενο</string>
     <string name="exitGR">Έξοδος</string>
-
-
+    <string name="nav_drawer_openGR">Άνοιξε το sidebar menu</string>
+    <string name="nav_drawer_closeGR">Κλείσε το sidebar menu</string>
+    <string name="yesGR">ΝΑΙ</string>
+    <string name="noGR">ΟΧΙ</string>
 </resources>

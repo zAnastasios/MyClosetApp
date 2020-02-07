@@ -47,7 +47,6 @@ public class LoginActivity extends AppCompatActivity {
 //        final AccessToken accessToken = AccessToken.getCurrentAccessToken();
 //        boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
 
-        fbLoginButton.setReadPermissions(Arrays.asList("email","public-profile"));
         // If you are using in a fragment, call loginButton.setFragment(this);
 
         toMain.setOnClickListener(new View.OnClickListener() {
@@ -64,15 +63,15 @@ public class LoginActivity extends AppCompatActivity {
             public void onSuccess(LoginResult loginResult) {
                 // App code
                 String acessToken = loginResult.getAccessToken().getToken();
-                GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
-                    @Override
-                    public void onCompleted(JSONObject object, GraphResponse response) {
-
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        intent.putExtra("photo",getFBData(object));
-                        startActivity(intent);
-                    }
-                });
+//                GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+//                    @Override
+//                    public void onCompleted(JSONObject object, GraphResponse response) {
+//
+//                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                        intent.putExtra("photo",getFBData(object));
+//                        startActivity(intent);
+//                    }
+//                });
             }
 
 
@@ -93,6 +92,8 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
                         // App code
+                        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                        startActivity(intent);
                     }
 
                     @Override

@@ -64,8 +64,8 @@ public class AddClotheActivity extends AppCompatActivity {
 
 
     //TODO ADD MORE COLORS HERE AND CATEGORIES
-    private static final String[] colors = {"Κόκκινο", "Πράσινο", "Μπλε"};
-    private static final String[] categories ={"Μπλόυζα","Φούστα","Μπουφάν"};
+    private static final String[] colors = {"Κόκκινο", "Πράσινο", "Μπλε","Κίτρινο","Μαύρο","Άσπρο","Ροζ","Γκρι","Μπεζ","Πολύχρωμο","Καφέ","Μπορντό","Μωβ","Χακί","Πορτοκαλί","Γαλάζιο","Τιρκουάζ"};
+    private static final String[] categories ={"Μπλόυζα","Φούστα","Μπουφάν","Φόρεμα","Παντελόνι","Φόρμα","Τζιν","Φούτερ","Ζακέτα"};
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -142,13 +142,6 @@ public class AddClotheActivity extends AppCompatActivity {
 
 
 
-
-
-
-
-
-
-
         cameraButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -220,7 +213,7 @@ public class AddClotheActivity extends AppCompatActivity {
 
 
         if(color.trim().isEmpty()||category.trim().isEmpty()||description.trim().isEmpty()||bitmap==null){
-            Toast.makeText(this,"LATHOS",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Συμπληρώστε όλα τα στοιχεία",Toast.LENGTH_LONG).show();
             return;
         }
 
