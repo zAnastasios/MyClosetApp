@@ -42,11 +42,7 @@ public class ClotheRepository {
 
 
 
- //   public List<Clothe> getClotheMatching(String style) {return clotheDao.get}
-
-
-
-
+    //   public List<Clothe> getClotheMatching(String style) {return clotheDao.get}
 //    private static class GetClothesByColorAsync extends AsyncTask<String,Void,Void>{
 //        private ClotheDAO clotheDAO;
 //        private GetClothesByColorAsync(ClotheDAO clotheDAO){

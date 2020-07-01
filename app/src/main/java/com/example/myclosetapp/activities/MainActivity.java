@@ -2,8 +2,10 @@ package com.example.myclosetapp.activities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -14,23 +16,36 @@ import android.content.DialogInterface;
 import android.content.Intent;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.example.myclosetapp.R;
 import com.example.myclosetapp.data.Clothe;
 import com.example.myclosetapp.login.LoginActivity;
 import com.example.myclosetapp.ui.ClotheAdapter;
 import com.example.myclosetapp.ui.ClotheViewModel;
+import com.example.myclosetapp.utils.CircleTransformation;
 import com.example.myclosetapp.utils.FormatDateTime;
 import com.facebook.AccessToken;
+import com.facebook.FacebookGraphResponseException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.login.Login;
+import com.facebook.login.LoginManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -44,6 +59,9 @@ public class MainActivity extends AppCompatActivity  {
     private Date dateOfUpdatedClothe;
     private ImageButton deleteClothe;
     private NavigationView mainNavView;
+    private DrawerLayout mainDrawer;
+    private androidx.appcompat.widget.Toolbar toolbar;
+    private Boolean isLoggedIn;
 
     private ClotheViewModel clotheViewModel;
     @Override
@@ -53,14 +71,45 @@ public class MainActivity extends AppCompatActivity  {
 
         deleteClothe=findViewById(R.id.button_delete_clothe);
         mainNavView=findViewById(R.id.main_user_navigation_view);
-        getSupportActionBar();
-        setTitle("Η ντουλάπα μου");
+        mainDrawer=findViewById(R.id.drawer_main);
+//        getSupportActionBar();
+//        setTitle("Η ντουλάπα μου");
+        toolbar = findViewById(R.id.toolbarMain);
+        toolbar.setTitle("Η ντουλάπα μου");
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,mainDrawer,toolbar,R.string.nav_drawer_openGR,R.string.nav_drawer_closeGR);
+        mainDrawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+
+
+
 
         final AccessToken accessToken = AccessToken.getCurrentAccessToken();
-        boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
+         isLoggedIn = accessToken != null && !accessToken.isExpired();
         if(isLoggedIn){
-
+        View navViewHeaderView = mainNavView.getHeaderView(0);
+            final TextView userUserName = navViewHeaderView.findViewById(R.id.navigation_user_header_name);
+            ImageView userImage = navViewHeaderView.findViewById(R.id.navigation_user_header_image);
+            String facebookUserID = accessToken.getUserId();
+            String facebookUrlString =  "https://graph.facebook.com/"+facebookUserID+"/picture?type=large";
+            Picasso.get()
+                    .load(facebookUrlString)
+                    .transform(new CircleTransformation())
+                    .into(userImage);
+//            GraphRequest request = GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
+//                @Override
+//                public void onCompleted(JSONObject object, GraphResponse response) {
+//                        Log.v("LoginActivity Response ", response.toString());
+//                        try {
+//                        userUserName.setText(object.getString("name"));
+//                        }
+//                        catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//                }
+//        });
         }
+
 
         FloatingActionButton buttonAddClothe = findViewById(R.id.button_add_clothe);
         buttonAddClothe.setOnClickListener(new View.OnClickListener() {
@@ -149,8 +198,31 @@ public class MainActivity extends AppCompatActivity  {
                         startActivity(intent4);
                         break;
                     case R.id.exit:
-                        Intent intent5 = new Intent(MainActivity.this, LoginActivity.class);
-                        startActivity(intent5);
+                        if (isLoggedIn){
+                            new AlertDialog.Builder(MainActivity.this)
+                                    .setTitle("Αποσύνδεση")
+                                    .setMessage("Θέλετε να αποσυνδεθείτε απο την εφαρμογή;")
+
+                                    // Specifying a listener allows you to take an action before dismissing the dialog.
+                                    // The dialog is automatically dismissed when a dialog button is clicked.
+                                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            LoginManager.getInstance().logOut();
+                                            Intent intent5 = new Intent(MainActivity.this, LoginActivity.class);
+                                            startActivity(intent5);
+                                        }
+                                    })
+
+                                    // A null listener allows the button to dismiss the dialog and take no further action.
+                                    .setNegativeButton(android.R.string.no, null)
+                                    .setIcon(android.R.drawable.ic_dialog_alert)
+                                    .show();
+
+                        }
+                        else {
+                            Intent intent5 = new Intent(MainActivity.this, LoginActivity.class);
+                            startActivity(intent5);
+                        }
                         break;
                 }
                 return false;
@@ -163,19 +235,19 @@ public class MainActivity extends AppCompatActivity  {
             @Override
             public void onClotheClickDelete(final Clothe clothe) {
                 new AlertDialog.Builder(MainActivity.this)
-                        .setTitle("Delete Clothe")
-                        .setMessage("Are you sure you want to delete this clothe?")
+                        .setTitle("Διαγραφή Ρούχου")
+                        .setMessage("Είστε σίγουροι ότι θέλετε θα διαγράψετε αυτό το ρούχο;")
 
                         // Specifying a listener allows you to take an action before dismissing the dialog.
                         // The dialog is automatically dismissed when a dialog button is clicked.
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        .setPositiveButton(R.string.yesGR, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 clotheViewModel.deleteClothe(clothe);
                             }
                         })
 
                         // A null listener allows the button to dismiss the dialog and take no further action.
-                        .setNegativeButton(android.R.string.no, null)
+                        .setNegativeButton(R.string.noGR, null)
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .show();
             }
@@ -210,12 +282,12 @@ public class MainActivity extends AppCompatActivity  {
          //   Date date = new Date(); //FormatDateTime.fromTimestampToDate(timestamp.toString());
             Clothe clothe = new Clothe(color,category,description,isClean, clotheImage,timestamp);
             clotheViewModel.insertClothe(clothe);
-            Toast.makeText(this,"Clothe saved",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Το ρούχο αποθηκεύτηκε επιτυχώς",Toast.LENGTH_SHORT).show();
 
         }else  if(requestCode==EDIT_CLOTHE_REQUEST&&resultCode==RESULT_OK){
             int id = data.getIntExtra(AddClotheActivity.EXTRA_ID,-1);
             if(id==-1){
-                Toast.makeText(this,"Clothe can't update",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Λάθος",Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -228,13 +300,35 @@ public class MainActivity extends AppCompatActivity  {
             Clothe clothe = new Clothe(color,category,description,isClean, clotheImage,timestamp);
             clothe.setClohteid(id);
             clotheViewModel.updateClothe(clothe);
-            Toast.makeText(this,"Clothe updated ",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Το ρούχο ενημερώθηκε",Toast.LENGTH_SHORT).show();
         }
         else{
-            Toast.makeText(this,"Clothe not saved",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Το ρούχο δεν αποθηκεύτηκε",Toast.LENGTH_SHORT).show();
         }
 
     }
 
+    @Override
+    public void onBackPressed() {
+            if (isLoggedIn){
+                new AlertDialog.Builder(MainActivity.this)
+                        .setTitle("Αποσύνδεση")
+                        .setMessage("Θέλετε να αποσυνδεθείτε απο την εφαρμογή;")
 
+                        // Specifying a listener allows you to take an action before dismissing the dialog.
+                        // The dialog is automatically dismissed when a dialog button is clicked.
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                LoginManager.getInstance().logOut();
+                                Intent intent5 = new Intent(MainActivity.this, LoginActivity.class);
+                                startActivity(intent5);
+                            }
+                        })
+
+                        // A null listener allows the button to dismiss the dialog and take no further action.
+                        .setNegativeButton(android.R.string.no, null)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+        }
+    }
 }
